@@ -1,5 +1,3 @@
-### Kinetic Simpe WP Blog
-
-# wp_dev
-Dev WP Theme
+# Kinetic Simpe WP Blog
+Dev Mode - Alpha v-1.0.0
 
