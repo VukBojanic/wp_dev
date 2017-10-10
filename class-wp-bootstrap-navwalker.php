@@ -4,6 +4,7 @@
  *
  * @package WP-Bootstrap-Navwalker
  */
+
 /*
  * Class Name: WP_Bootstrap_Navwalker
  * Plugin Name: WP Bootstrap Navwalker
@@ -17,6 +18,7 @@
  * License: GPL-3.0+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 */
+
 /* Check if Class Exists. */
 if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 	/**
@@ -25,6 +27,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 	 * @extends Walker_Nav_Menu
 	 */
 	class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
+
 		/**
 		 * Start Level.
 		 *
@@ -46,8 +49,10 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				// build a string to use as aria-labelledby.
 				$labledby = 'aria-labelledby="' . end( $matches[2] ) . '"';
 			}
+
 			$output .= "\n$indent<ul role=\"menu\" class=\" dropdown-menu\" " . $labledby . ">\n";
 		}
+
 		/**
 		 * Start El.
 		 *
@@ -64,6 +69,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 */
 		public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 			$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
+
 			$value = '';
 			$class_names = $value;
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
@@ -106,11 +112,13 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 			$output .= $indent . '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' . $id . $value . $class_names . '>';
 			$atts = array();
+
 			if ( empty( $item->attr_title ) ) {
 				$atts['title']  = ! empty( $item->title )   ? strip_tags( $item->title ) : '';
 			} else {
 				$atts['title'] = $item->attr_title;
 			}
+
 			$atts['target'] = ! empty( $item->target )	? $item->target	: '';
 			$atts['rel']    = ! empty( $item->xfn )		? $item->xfn	: '';
 			// If item has_children add atts to a.
@@ -138,6 +146,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					if ( ! empty( $link_class ) ) {
 						// update $atts with the extra class link.
 						$atts['class'] .= ' ' . esc_attr( $link_class );
+
 						// if the modification is a disabled class...
 						if ( 'disabled' === $link_class ) {
 							// then # the link so it doesn't point anywhere.
@@ -156,6 +165,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 			$item_output = $args->before;
 			$item_output .= '<a' . $attributes . '>';
+
 			// initiate empty icon var then if we have a string containing icon classes...
 			$icon_html = '';
 			if ( ! empty( $icon_class_string ) ) {
@@ -166,7 +176,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$item_output .= '</a>';
 			$item_output .= $args->after;
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+
 		}
+
 		/**
 		 * Traverse elements to create list from elements.
 		 *
@@ -197,6 +209,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$args[0]->has_children = ! empty( $children_elements[ $element->$id_field ] ); }
 			parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
 		}
+
 		/**
 		 * Menu Fallback
 		 * =============
@@ -209,14 +222,17 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 */
 		public static function fallback( $args ) {
 			if ( current_user_can( 'edit_theme_options' ) ) {
+
 				/* Get Arguments. */
 				$container = $args['container'];
 				$container_id = $args['container_id'];
 				$container_class = $args['container_class'];
 				$menu_class = $args['menu_class'];
 				$menu_id = $args['menu_id'];
+
 				// initialize var to store fallback html.
 				$fallback_output = '';
+
 				if ( $container ) {
 					$fallback_output = '<' . esc_attr( $container );
 					if ( $container_id ) {
@@ -238,6 +254,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				if ( $container ) {
 					$fallback_output = '</' . esc_attr( $container ) . '>';
 				}
+
 				// if $args has 'echo' key and it's true echo, otherwise return.
 				if ( array_key_exists( 'echo', $args ) && $args['echo'] ) {
 					echo $fallback_output; // WPCS: XSS OK.

@@ -7,6 +7,7 @@ function kinetic_script_enqueue() {
   //JS
   wp_enqueue_script('jquery');
   wp_enqueue_script('bootstrapjs', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '4.0.0-beta-dist', true);
+  wp_enqueue_script('popper', get_template_directory_uri() . '/js/popper.js', array(), '', true);
   wp_enqueue_script('customjs', get_template_directory_uri() . '/js/kinetic.js', array(), '1.0.0', true);
 	
 }
