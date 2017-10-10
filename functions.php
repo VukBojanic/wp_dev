@@ -22,6 +22,9 @@ function kinetic_theme_setup() {
   register_nav_menu('secondary', 'Footer Navigation');
 }
 
+// Register Custom Navigation Walker for Bootstrap
+require_once('class-wp-bootstrap-navwalker.php');
+
 // Theme Support
 add_action('init', 'kinetic_theme_setup');
 
